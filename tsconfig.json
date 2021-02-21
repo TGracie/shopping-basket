@@ -16,6 +16,8 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
+    "strictPropertyInitialization": false,
+    "suppressImplicitAnyIndexErrors": true,
     "lib": [
       "es2018",
       "dom"
@@ -23,6 +25,7 @@
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
+    "suppressImplicitAnyIndexErrors": true,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true

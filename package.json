@@ -24,6 +24,8 @@
     "@capacitor-community/http": "^0.3.0",
     "@capacitor/angular": "^1.0.3",
     "@capacitor/core": "latest",
+    "currency-codes": "^2.1.0",
+    "http-status-codes": "^2.1.4",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"

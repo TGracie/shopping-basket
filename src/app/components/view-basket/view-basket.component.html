@@ -1,0 +1,58 @@
+<mat-toolbar>
+    <span>Basket</span>
+    <span class="spacer"></span>
+    <mat-form-field>
+        <mat-label>Select Currency</mat-label>
+        <mat-select (selectionChange)="updateSelectedCode($event.value)">
+            <mat-option *ngFor="let code of currencyCodes" [value]="code">{{code}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</mat-toolbar>
+
+<table mat-table [dataSource]="basketService.currentBasket.items" class="mat-elevation-z8">
+    <ng-container matColumnDef="label">
+        <!-- item name -->
+        <th mat-header-cell *matHeaderCellDef> Item </th>
+        <td mat-cell *matCellDef="let basketItem">{{basketItem.item.label}}</td>
+    </ng-container>
+    <ng-container matColumnDef="unit">
+        <!-- item name -->
+        <th mat-header-cell *matHeaderCellDef> Unit </th>
+        <td mat-cell *matCellDef="let basketItem">{{basketItem.item.unit}}</td>
+    </ng-container>
+    <ng-container matColumnDef="quantity">
+        <!-- item name -->
+        <th mat-header-cell *matHeaderCellDef> Quantity </th>
+        <td mat-cell *matCellDef="let basketItem">{{basketItem.quantity}}</td>
+    </ng-container>
+    <ng-container matColumnDef="price">
+        <!-- item name -->
+        <th mat-header-cell *matHeaderCellDef> Price </th>
+        <td mat-cell *matCellDef="let basketItem">
+            {{basketItem.item.price | exchange:selectedCode | currency:selectedCode}}</td>
+    </ng-container>
+    <ng-container matColumnDef="subtotal">
+        <!-- item name -->
+        <th mat-header-cell *matHeaderCellDef> Subtotal </th>
+        <td mat-cell *matCellDef="let basketItem">{{basketItem | subtotal | exchange:selectedCode |
+            currency:selectedCode}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+<mat-toolbar>
+    <span class="spacer"></span>
+    <span class="spacer"></span>
+    <span class="spacer"></span>
+    <span class="spacer"></span>
+    <span class="spacer"></span>
+    <span class="spacer"></span>
+    <span class="spacer"></span>
+    <span class="title">Total</span>
+    <span>{{basketService.currentBasket | total | exchange:selectedCode | currency:selectedCode}}</span>
+    <span class="spacer"></span>
+    <button mat-raised-button color="primary" (click)="basketService.purchaseBasket()">Purchase</button>
+    <button mat-raised-button color="warn" (click)="basketService.emptyBasket()">Empty</button>
+</mat-toolbar>

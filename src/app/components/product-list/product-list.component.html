@@ -1,0 +1,35 @@
+<mat-toolbar>
+    <span>Products</span>
+    <span class="spacer"></span>
+    <mat-form-field>
+        <mat-label>Select Currency</mat-label>
+        <mat-select (selectionChange)="updateSelectedCode($event.value)">
+            <mat-option *ngFor="let code of currencyCodes" [value]="code">{{code}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+</mat-toolbar>
+<mat-grid-list cols="4" class="flex-container">
+    <mat-grid-tile *ngFor="let product of products">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>{{product.label}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-card-subtitle>Price</mat-card-subtitle>
+                <mat-card-subtitle *ngIf="selectedCode">{{product.price
+                    | exchange:selectedCode | currency:selectedCode
+                    }}</mat-card-subtitle>
+                <mat-card-subtitle *ngIf="!selectedCode">{{product.price | currency}}
+                </mat-card-subtitle>
+                <mat-card-subtitle>Units</mat-card-subtitle>
+                <mat-card-subtitle>{{product.unit}}</mat-card-subtitle>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-fab (click)="basketService.addToBasket(product)">
+                    <mat-icon>add_shopping_cart</mat-icon>
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>

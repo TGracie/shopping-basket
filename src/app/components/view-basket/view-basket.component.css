@@ -1,0 +1,15 @@
+mat-toolbar {
+    height: 80px;
+}
+
+mat-form-field {
+    padding-top: 10px;
+}
+
+table {
+    width: 100%;
+}
+
+.title {
+    margin-right: 15px;
+}
