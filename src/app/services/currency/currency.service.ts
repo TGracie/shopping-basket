@@ -22,7 +22,6 @@ export class CurrencyService {
       url: 'https://api.exchangeratesapi.io/latest?base=USD'
     }).then(response => {
       if (response.status === StatusCodes.OK) {
-        console.log('exchange rates', response.data.rates)
         this.exchangeRates = response.data.rates;
         return Promise.resolve(response.data.rates);
       } else {
